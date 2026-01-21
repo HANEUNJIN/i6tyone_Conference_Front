@@ -141,8 +141,6 @@ onMounted(() => {
 <template>
   <CRow class="g-3">
     <CCol sm="4">
-
-
       <CCard class="mb-3">
         <CCardHeader>
           <p class="fw-bold mb-0">출석·전송별 통계</p>
@@ -179,6 +177,16 @@ onMounted(() => {
               </div>
             </template>
           </UiDataTable>
+        </CCardBody>
+      </CCard>
+
+      <CCard class="mb-3">
+        <CCardHeader>
+          <p class="fw-bold mb-0">좌석 배치도</p>
+        </CCardHeader>
+
+        <CCardBody>
+          <CImage :src="seat" />
         </CCardBody>
       </CCard>
     </CCol>
@@ -332,47 +340,38 @@ onMounted(() => {
     </CCol>
   </CRow>
 
-  <CRow class="g-3">
-    <CCol sm="4">
-      <CCard class="mb-3">
-        <CCardHeader>
-          <p class="fw-bold mb-0">좌석 배치도</p>
-        </CCardHeader>
+<!--  <CRow class="g-3">-->
+<!--    <CCol sm="4">-->
+<!--    </CCol>-->
 
-        <CCardBody>
-          <CImage :src="seat" />
-        </CCardBody>
-      </CCard>
-    </CCol>
+<!--    <CCol sm="8">-->
+<!--      <CCard class="mb-3">-->
+<!--        <CCardHeader>-->
+<!--          <p class="fw-bold mb-0">남은 좌석별 통계</p>-->
+<!--        </CCardHeader>-->
 
-    <CCol sm="8">
-      <CCard class="mb-3">
-        <CCardHeader>
-          <p class="fw-bold mb-0">남은 좌석별 통계</p>
-        </CCardHeader>
-
-        <CCardBody>
-          <UiDataTable
-            :columns="COLUMNS5"
-            :items="areaRemaining"
-            :loading="optionsLoading"
-            :row-clickable="true"
-            :row-span-columns="['floor', 'area']"
-          >
-            <template #cell-day="{ item }">
-              <div class="fw-bold">
-                <span v-if="item.day === '1'">화</span>
-                <span v-if="item.day === '2'">수</span>
-                <span v-if="item.day === '3'">목</span>
-                <span v-if="item.day === '4'">3-day</span>
-                <span v-else></span>
-              </div>
-            </template>
-          </UiDataTable>
-        </CCardBody>
-      </CCard>
-    </CCol>
-  </CRow>
+<!--        <CCardBody>-->
+<!--          <UiDataTable-->
+<!--            :columns="COLUMNS5"-->
+<!--            :items="areaRemaining"-->
+<!--            :loading="optionsLoading"-->
+<!--            :row-clickable="true"-->
+<!--            :row-span-columns="['floor', 'area']"-->
+<!--          >-->
+<!--            <template #cell-day="{ item }">-->
+<!--              <div class="fw-bold">-->
+<!--                <span v-if="item.day === '1'">화</span>-->
+<!--                <span v-if="item.day === '2'">수</span>-->
+<!--                <span v-if="item.day === '3'">목</span>-->
+<!--                <span v-if="item.day === '4'">3-day</span>-->
+<!--                <span v-else></span>-->
+<!--              </div>-->
+<!--            </template>-->
+<!--          </UiDataTable>-->
+<!--        </CCardBody>-->
+<!--      </CCard>-->
+<!--    </CCol>-->
+<!--  </CRow>-->
 
   <!--  <CRow class="g-3">-->
   <!--    <CCol sm="3">-->
