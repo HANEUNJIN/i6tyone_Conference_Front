@@ -357,7 +357,7 @@ onMounted(() => {
     <CCardHeader>
       <h6 class="mb-0 fw-bold">
         총 수량
-        <span class="text-danger">{{ formatMoney(item.countTotal) }}</span>건
+        <span class="text-danger">{{ formatMoney(items?.[0]?.countTotal) }}</span>건
       </h6>
     </CCardHeader>
 
