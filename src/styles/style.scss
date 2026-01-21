@@ -1,0 +1,219 @@
+@use './theme';
+@use '@coreui/coreui/scss/coreui' as *;
+@use '@coreui/chartjs/scss/coreui-chartjs';
+@use 'vendors/simplebar';
+@use '@vuepic/vue-datepicker/dist/main.css';
+
+
+body {
+  background-color: var(--cui-tertiary-bg);
+  word-break: break-all;
+}
+
+table {
+  width: 100% !important;
+}
+
+pre{
+  margin:0;
+  white-space: pre-line;
+}
+
+.wrapper {
+  width: 100%;
+  padding-inline: var(--cui-sidebar-occupy-start, 0) var(--cui-sidebar-occupy-end, 0);
+  will-change: auto;
+  @include transition(padding 0.15s);
+}
+
+.header > .container-fluid,
+.sidebar-header {
+  min-height: calc(4rem + 1px); // stylelint-disable-line function-disallowed-list
+}
+
+.sidebar-brand-full {
+  margin-left: 3px;
+}
+
+.sidebar-header {
+  .nav-underline-border {
+    --cui-nav-underline-border-link-padding-x: 1rem;
+    --cui-nav-underline-border-gap: 0;
+  }
+
+  .nav-link {
+    display: flex;
+    align-items: center;
+    min-height: calc(4rem + 1px); // stylelint-disable-line function-disallowed-list
+  }
+}
+
+.sidebar-toggler {
+  margin-inline-start: auto;
+}
+
+.sidebar-narrow,
+.sidebar-narrow-unfoldable:not(:hover) {
+  .sidebar-toggler {
+    margin-inline-end: auto;
+  }
+}
+
+.header > .container-fluid + .container-fluid {
+  min-height: 3rem;
+}
+
+.footer {
+  min-height: calc(3rem + 1px); // stylelint-disable-line function-disallowed-list
+}
+
+.card-body{
+  position:relative;
+  display: flex;
+  flex-direction: column;
+}
+
+@include color-mode(dark) {
+  body {
+    background-color: var(--cui-dark-bg-subtle);
+  }
+
+  .footer {
+    --cui-footer-bg: var(--cui-body-bg);
+  }
+}
+/** ─────────────────────────────────────────────────────────────
+ * 커스텀
+ * ──────────────────────────────────────────────────────────── */
+.body {
+  padding-bottom: 20px;
+}
+.container-lg {
+  max-width: 100% !important;
+}
+.pagination {
+  margin: 0;
+  justify-content: center;
+}
+.page-link {
+  cursor: pointer;
+}
+.page-link.active,
+.active > .page-link {
+  cursor: default;
+}
+
+.board-info-contents img {
+  max-width: 100%;
+}
+
+.sidebar-nav .nav-title{
+  margin-top:0
+}
+
+//.table{
+//  table-layout: fixed;
+//}
+
+.form-control,
+.form-select{
+  background-color: var(--cui-gray-100);
+}
+
+// Datepicker
+.dp__input.form-control {
+  width: 100%;
+  padding: 0.375rem 0.75rem 0.375rem 2rem;
+  font-size: 0.95rem;
+  line-height: 1.5;
+  color: var(--cui-body-color);
+  -webkit-appearance: none;
+  background-color:  var(--cui-gray-100);
+  border: var(--cui-border-width) solid var(--cui-border-color);
+  border-radius: var(--cui-border-radius);
+  transition: border-color 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+
+.dp__input.form-control-sm{
+  min-height: calc(1.5em + 0.5rem + calc(var(--cui-border-width) * 2));
+  padding: 0.25rem 0.5rem 0.25rem 2rem;
+  font-size: 0.83125rem;
+  border-radius: var(--cui-border-radius-sm);
+}
+
+/* 에디터/툴바 스타일을 CoreUI 카드와 어울리게 */
+.ck-toolbar {
+  border-radius: 0.4rem 0.4rem 0 0 !important;
+}
+
+.ck.ck-editor__editable:not(.ck-editor__nested-editable) {
+  margin-top: -1px;
+  min-height: 320px;
+  border: 1px solid #dbdfe6;
+  border-radius: 0 0 0.4rem 0.4rem;
+}
+
+.ck-content img{
+  max-width: 100%;
+}
+
+.btn{
+  white-space: nowrap;
+}
+
+.nav-link{
+  cursor: pointer;
+}
+
+.form-check .form-check-input,
+.form-check-label,
+.form-check-input{
+  cursor: pointer;
+}
+
+.form-check,
+.form-check-label{
+  margin-bottom:0;
+}
+
+.form-check{
+  min-height:auto;
+}
+.form-switch{
+  min-height:18px;
+}
+
+.modal {
+  padding-inline: var(--cui-sidebar-occupy-start, 0) var(--cui-sidebar-occupy-end, 0) !important;
+}
+
+.modal-header{
+  background-color: var(--cui-gray-200);
+}
+
+.truncate-multiline {
+  margin:0;
+  padding:0;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  display: -webkit-box;
+  -webkit-line-clamp: 1;
+  -webkit-box-orient: vertical;
+  word-wrap: break-word;
+  max-width: 100%;
+}
+
+.list-group-item-action {
+  color: var(--cui-list-group-color);
+}
+
+.list-group-item.active {
+  color: var(--cui-list-group-active-color) !important;
+}
+
+pre {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", "Noto Sans", "Liberation Sans", Arial,
+  sans-serif, "Apple Color Emoji", "Segoe UI Emoji", "Segoe UI Symbol", "Noto Color Emoji";
+  font-size: 12px;
+  font-weight: 700;
+}

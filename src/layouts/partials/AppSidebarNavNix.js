@@ -1,0 +1,179 @@
+import { defineComponent, h, onMounted, ref, resolveComponent } from 'vue';
+import { RouterLink, useRoute, useRouter } from 'vue-router';
+
+import { CBadge, CSidebarNav, CNavItem, CNavGroup, CNavTitle } from '@coreui/vue';
+import nav from '@/layouts/navigation/nav.nix.config.js';
+
+import simplebar from 'simplebar-vue';
+import 'simplebar-vue/dist/simplebar.min.css';
+import { useBaseStore } from '@/stores/base';
+import { storeToRefs } from 'pinia';
+import { useToast } from '@/composables/useToast';
+
+const normalizePath = (path) =>
+  decodeURI(path)
+    .replace(/#.*$/, '')
+    .replace(/(index)?\.(html)$/, '');
+
+const isActiveLink = (route, link) => {
+  if (link === undefined) {
+    return false;
+  }
+
+  if (route.hash === link) {
+    return true;
+  }
+
+  const currentPath = normalizePath(route.path);
+  const targetPath = normalizePath(link);
+
+  return currentPath === targetPath;
+};
+
+const isActiveByMenuKey = (route, item) =>
+  !!(item?.menuKey && route.matched.some((r) => r.meta?.menuKey === item.menuKey));
+
+const isActiveItem = (route, item) => {
+  if (isActiveLink(route, item.to)) return true;
+  if (isActiveByMenuKey(route, item)) return true;
+  if (item.items) return item.items.some((child) => isActiveItem(route, child));
+  return false;
+};
+
+const AppSidebarNavNix = defineComponent({
+  name: 'AppSidebarNavNix',
+  components: {
+    CNavItem,
+    CNavGroup,
+    CNavTitle,
+  },
+  setup() {
+    const route = useRoute();
+    const router = useRouter();
+    const toast = useToast();
+    const firstRender = ref(true);
+    const base = useBaseStore();
+    const { storeLicenseCd } = storeToRefs(base);
+
+    onMounted(() => {
+      firstRender.value = false;
+    });
+
+    const renderItem = (item) => {
+      if (item.items) {
+        return h(
+          CNavGroup,
+          {
+            as: 'div',
+            compact: true,
+            ...(firstRender.value && {
+              visible: item.items.some((child) => isActiveItem(route, child)),
+            }),
+          },
+          {
+            togglerContent: () => [
+              h(resolveComponent('CIcon'), {
+                customClassName: 'nav-icon',
+                name: item.icon,
+              }),
+              item.name,
+            ],
+            default: () => item.items.map((child) => renderItem(child)),
+          },
+        );
+      }
+
+      if (item.href) {
+        return h(
+          resolveComponent(item.component),
+          {
+            href: item.href,
+            target: '_blank',
+            rel: 'noopener noreferrer',
+          },
+          {
+            default: () => [
+              item.icon
+                ? h(resolveComponent('CIcon'), {
+                    customClassName: 'nav-icon',
+                    name: item.icon,
+                  })
+                : h('span', { class: 'nav-icon' }, h('span', { class: 'nav-icon-bullet' })),
+              item.name,
+              item.external &&
+                h(resolveComponent('CIcon'), {
+                  class: 'ms-2',
+                  name: 'cil-external-link',
+                  size: 'sm',
+                }),
+              item.badge &&
+                h(
+                  CBadge,
+                  {
+                    class: 'ms-auto',
+                    color: item.badge.color,
+                    size: 'sm',
+                  },
+                  {
+                    default: () => item.badge.text,
+                  },
+                ),
+            ],
+          },
+        );
+      }
+
+      return item.to
+        ? h(
+            'div', // RouterLink 대신 div 사용
+            {
+              class: ['nav-item nav-link', { active: isActiveItem(route, item) }],
+              onClick: () => {
+                if (
+                  (item.name === '고객상세' || item.name === '사용내역서') &&
+                  !storeLicenseCd.value
+                ) {
+                  toast.error('상단 우측 병원검색을 클릭 후 병원을 선택해주세요.');
+                  return; // 이동 막기
+                }
+                router.push(item.to);
+              },
+            },
+            [
+              item.icon
+                ? h(resolveComponent('CIcon'), { name: item.icon, customClassName: 'nav-icon' })
+                : h('span', { class: 'nav-icon' }, h('span', { class: 'nav-icon-bullet' })),
+              item.name,
+              item.badge &&
+                h(
+                  CBadge,
+                  { class: 'ms-auto', color: item.badge.color, size: 'sm' },
+                  { default: () => item.badge.text },
+                ),
+            ],
+          )
+        : h(
+            resolveComponent(item.component),
+            {
+              as: 'div',
+            },
+            {
+              default: () => item.name,
+            },
+          );
+    };
+
+    return () =>
+      h(
+        CSidebarNav,
+        {
+          as: simplebar,
+        },
+        {
+          default: () => nav.map((item) => renderItem(item)),
+        },
+      );
+  },
+});
+
+export { AppSidebarNavNix };
