@@ -81,6 +81,12 @@ const COLUMNS5 = [
   { key: 'remain', label: '남은 좌석 수', width: '5%', align: 'right' },
 ];
 
+const COLUMNS6 = [
+  { key: 'dateYmd', label: '날짜', width: '5%' },
+  { key: 'day', label: '신청일', width: '5%' },
+  { key: 'totalCount', label: '총 등록자 수', width: '5%', align: 'right' },
+];
+
 //통계
 const summary = ref([]);
 const totalAreaList = computed(() => [totalArea.value]);
@@ -94,6 +100,7 @@ const totalAttend = ref({
   attendCount: 0, //출석 건수
 });
 const areaRemaining = ref([]);
+const totalDay = ref([]);
 
 const fetchStatistics = async () => {
   optionsLoading.value = true;
@@ -126,6 +133,13 @@ const fetchStatistics = async () => {
       toastApi.errorFromResult(areaRemainingRes);
     }
     areaRemaining.value = areaRemainingRes.data?.data?.list;
+
+    // 날짜별 건수 통계
+    const dayRes = await ConferenceApi.getDay();
+    if (!dayRes.ok) {
+      toastApi.errorFromResult(dayRes);
+    }
+    totalDay.value = dayRes.data?.data?.list;
   } catch (e) {
     toastApi.errorFromException(e);
   } finally {
@@ -141,44 +155,7 @@ onMounted(() => {
 <template>
   <CRow class="g-3">
     <CCol sm="4">
-      <CCard class="mb-3">
-        <CCardHeader>
-          <p class="fw-bold mb-0">출석·전송별 통계</p>
-        </CCardHeader>
 
-        <CCardBody>
-          <UiDataTable
-            :columns="COLUMNS4"
-            :items="totalAttend"
-            :loading="optionsLoading"
-            :row-clickable="true"
-          >
-            <template #cell-yn="{ item }">
-              <div :class="item.yn === 'N' ? 'text-danger fw-bold' : ''">
-                {{ item.yn === 'Y' ? '전송' : '미전송' }}
-              </div>
-            </template>
-
-            <template #cell-attend="{ item }">
-              <div :class="item.yn === 'N' ? 'text-danger fw-bold' : ''">
-                {{ formatMoney(item?.attend) }}
-              </div>
-            </template>
-
-            <template #cell-qrSms="{ item }">
-              <div :class="item.yn === 'N' ? 'text-danger fw-bold' : ''">
-                {{ formatMoney(item?.qrSms) }}
-              </div>
-            </template>
-
-            <template #cell-notionSms="{ item }">
-              <div :class="item.yn === 'N' ? 'text-danger fw-bold' : ''">
-                {{ formatMoney(item?.notionSms) }}
-              </div>
-            </template>
-          </UiDataTable>
-        </CCardBody>
-      </CCard>
 
       <CCard class="mb-3">
         <CCardHeader>
@@ -340,38 +317,116 @@ onMounted(() => {
     </CCol>
   </CRow>
 
-<!--  <CRow class="g-3">-->
-<!--    <CCol sm="4">-->
-<!--    </CCol>-->
+  <CRow class="g-3">
+    <CCol sm="4">
+    </CCol>
 
-<!--    <CCol sm="8">-->
-<!--      <CCard class="mb-3">-->
-<!--        <CCardHeader>-->
-<!--          <p class="fw-bold mb-0">남은 좌석별 통계</p>-->
-<!--        </CCardHeader>-->
+    <CCol sm="4">
+      <CCard class="mb-3">
+        <CCardHeader>
+          <p class="fw-bold mb-0">날짜별 건수 통계</p>
+        </CCardHeader>
 
-<!--        <CCardBody>-->
-<!--          <UiDataTable-->
-<!--            :columns="COLUMNS5"-->
-<!--            :items="areaRemaining"-->
-<!--            :loading="optionsLoading"-->
-<!--            :row-clickable="true"-->
-<!--            :row-span-columns="['floor', 'area']"-->
-<!--          >-->
-<!--            <template #cell-day="{ item }">-->
-<!--              <div class="fw-bold">-->
-<!--                <span v-if="item.day === '1'">화</span>-->
-<!--                <span v-if="item.day === '2'">수</span>-->
-<!--                <span v-if="item.day === '3'">목</span>-->
-<!--                <span v-if="item.day === '4'">3-day</span>-->
-<!--                <span v-else></span>-->
-<!--              </div>-->
-<!--            </template>-->
-<!--          </UiDataTable>-->
-<!--        </CCardBody>-->
-<!--      </CCard>-->
-<!--    </CCol>-->
-<!--  </CRow>-->
+        <CCardBody>
+          <UiDataTable
+            :columns="COLUMNS6"
+            :items="totalDay"
+            :loading="optionsLoading"
+            :row-clickable="true"
+            :row-span-columns="['dateYmd']"
+          >
+            <template #cell-day="{ item }">
+              <div class="fw-bold">
+                <span v-if="item.day === '1'">화</span>
+                <span v-if="item.day === '2'">수</span>
+                <span v-if="item.day === '3'">목</span>
+                <span v-if="item.day === '4'">3-day</span>
+                <span v-else></span>
+              </div>
+            </template>
+
+            <template #cell-totalCount="{ item }">
+              {{ formatMoney(Number(item?.totalCount)) }}
+            </template>
+          </UiDataTable>
+        </CCardBody>
+      </CCard>
+    </CCol>
+
+    <CCol sm="4">
+      <CCard class="mb-3">
+        <CCardHeader>
+          <p class="fw-bold mb-0">출석·전송별 통계</p>
+        </CCardHeader>
+
+        <CCardBody>
+          <UiDataTable
+            :columns="COLUMNS4"
+            :items="totalAttend"
+            :loading="optionsLoading"
+            :row-clickable="true"
+          >
+            <template #cell-yn="{ item }">
+              <div :class="item.yn === 'N' ? 'text-danger fw-bold' : ''">
+                {{ item.yn === 'Y' ? '전송' : '미전송' }}
+              </div>
+            </template>
+
+            <template #cell-attend="{ item }">
+              <div :class="item.yn === 'N' ? 'text-danger fw-bold' : ''">
+                {{ formatMoney(item?.attend) }}
+              </div>
+            </template>
+
+            <template #cell-qrSms="{ item }">
+              <div :class="item.yn === 'N' ? 'text-danger fw-bold' : ''">
+                {{ formatMoney(item?.qrSms) }}
+              </div>
+            </template>
+
+            <template #cell-notionSms="{ item }">
+              <div :class="item.yn === 'N' ? 'text-danger fw-bold' : ''">
+                {{ formatMoney(item?.notionSms) }}
+              </div>
+            </template>
+          </UiDataTable>
+        </CCardBody>
+      </CCard>
+    </CCol>
+  </CRow>
+
+  <!--  <CRow class="g-3">-->
+  <!--    <CCol sm="4">-->
+  <!--    </CCol>-->
+
+  <!--    <CCol sm="8">-->
+  <!--      <CCard class="mb-3">-->
+  <!--        <CCardHeader>-->
+  <!--          <p class="fw-bold mb-0">남은 좌석별 통계</p>-->
+  <!--        </CCardHeader>-->
+
+  <!--        <CCardBody>-->
+  <!--          <UiDataTable-->
+  <!--            :columns="COLUMNS5"-->
+  <!--            :items="areaRemaining"-->
+  <!--            :loading="optionsLoading"-->
+  <!--            :row-clickable="true"-->
+  <!--            :row-span-columns="['floor', 'area']"-->
+  <!--          >-->
+  <!--            <template #cell-day="{ item }">-->
+  <!--              <div class="fw-bold">-->
+  <!--                <span v-if="item.day === '1'">화</span>-->
+  <!--                <span v-if="item.day === '2'">수</span>-->
+  <!--                <span v-if="item.day === '3'">목</span>-->
+  <!--                <span v-if="item.day === '4'">3-day</span>-->
+  <!--                <span v-else></span>-->
+  <!--              </div>-->
+  <!--            </template>-->
+  <!--          </UiDataTable>-->
+  <!--        </CCardBody>-->
+  <!--      </CCard>-->
+  <!--    </CCol>-->
+  <!--  </CRow>-->
 
   <!--  <CRow class="g-3">-->
   <!--    <CCol sm="3">-->

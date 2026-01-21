@@ -105,4 +105,10 @@ export const ConferenceApi = {
     const url = buildUrl(`/api/Statistics/area/remaining`);
     return client.get(url);
   },
+
+  // 날짜별 건수 통계
+  getDay() {
+    const url = buildUrl(`/api/Statistics/day`);
+    return client.get(url);
+  }
 };
