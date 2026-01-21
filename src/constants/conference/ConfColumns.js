@@ -13,10 +13,10 @@ export const CONF_COLUMNS = [
   { key: 'age', label: '나이', width: '3%' },
 
   { key: 'church', label: '교회', width: '10%', align: 'left' },
-  // { key: 'local', label: '거주지역', width: '6%' },
+  { key: 'local', label: '거주지역', width: '6%' },
   // { key: 'denom', label: '교단', width: '6%' },
   // { key: 'newBelieverYn', label: '새신자', width: '5%' },
-  { key: 'memo', label: '메모', width: '16%', align: 'left' },
+  { key: 'memo', label: '메모', width: '10%', align: 'left' },
 
 
   { key: 'notionSmsYn', label: '노션 전송', width: '4%' },
