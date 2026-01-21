@@ -40,16 +40,18 @@ const modal = useConfirmModal();
 const isLoading = ref(false);
 const isSubmitting = ref(false);
 const optionsLoading = ref(false);
-const detailInfo = ref({
+const initDetailInfo = () => ({
   buyer: '',
   attender: '',
   phone: '',
   age: '0',
   church: '',
   local: '',
+  denom: '',
   count: '1',
   memo: '',
 });
+const detailInfo = ref(initDetailInfo());
 
 const ticket = ref('0'); //티켓구분
 const ticketOptions = ref([]);
@@ -273,7 +275,19 @@ const handleCancel = () => {
   modalVisible.value = false;
 };
 
+const reset = () => {
+  ticket.value = '';
+  days.value = '';
+  gender.value = '';
+  area.value = '';
+  newBelieverYn.value = '';
+  notionSmsYn.value = '';
+
+  detailInfo.value = initDetailInfo();
+};
+
 onMounted(() => {
+  reset();
   fetchSearchOptions();
 });
 </script>
