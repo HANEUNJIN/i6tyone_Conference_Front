@@ -286,6 +286,27 @@ const sendQrCode = async (row) => {
   }
 };
 
+const onInterlock = async () => {
+  const confirm = await modal.show({
+    title: '이벤터스 연동.xlsx',
+    message: '데이터를 연동 하시겠습니까?',
+    confirmText: '연동',
+  });
+  if (!confirm)
+    return;
+
+  try {
+    const res = await ConferenceApi.getGoogleSheetInterlock();
+    if (res.data?.resultCd !== '0000')
+      return toast.error(res.data?.resultMsg);
+
+    const successCount = res.data?.data?.successCount;
+    toast.success(`${successCount}건의 데이터가 연동되었습니다.`);
+  } catch (e) {
+    toastApi.errorFromException(e);
+  }
+};
+
 onMounted(() => {
   fetchSearchOptions();
   fetchStatistics();
@@ -301,6 +322,12 @@ onMounted(() => {
     </CCardHeader>
 
     <CCardBody>
+      <div class="mb-2">
+        <span class="fw-bold">ℹ️ 이벤터스 연동 방법 안내</span><br />
+        1. <span class="text-info text-decoration-underline">이벤터스 연동.xlsx</span> 파일을 기준으로 등록 명단을 연동해 주시기 바랍니다.<br />
+        2. 연동 완료 및 데이터 확인 후, 해당 파일은 <span class="text-danger">초기화</span>해 주시기 바랍니다.
+      </div>
+
       <UiSearchBar
         v-model="keyword"
         :loading="loading"
@@ -339,6 +366,7 @@ onMounted(() => {
           <CButton color="dark" size="sm" type="button" @click="onCreate">등록</CButton>
           <!--          <CButton color="warning" size="sm" type="button" @click="onSms">SMS 전송</CButton>-->
           <CButton color="success" size="sm" type="button" @click="excelDownload">엑셀</CButton>
+          <CButton color="primary" size="sm" @click="onInterlock">이벤터스 연동</CButton>
 
           <!--          <CFormCheck-->
           <!--            class="checkbox"-->

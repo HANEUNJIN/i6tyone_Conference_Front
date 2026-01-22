@@ -110,5 +110,11 @@ export const ConferenceApi = {
   getDay() {
     const url = buildUrl(`/api/Statistics/day`);
     return client.get(url);
+  },
+
+  // 이벤터스 Google Sheet 연동
+  getGoogleSheetInterlock() {
+    const url = buildUrl(`/api/Excel/google-sheet`);
+    return client.get(url);
   }
 };
