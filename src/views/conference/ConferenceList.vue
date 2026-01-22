@@ -275,9 +275,8 @@ const sendQrCode = async (row) => {
     };
 
     const res = await ConferenceApi.postQrCodeSmsSend(params);
-    console.log(res);
-    // if (!res.ok)
-    //   return toastApi.errorFromResult(res);
+    if (res.data?.resultCd !== '0000')
+      return toast.error(res.data?.resultMsg);
 
     toast.success('전송되었습니다.');
     init();
