@@ -304,7 +304,7 @@ onMounted(() => {
       <UiSearchBar
         v-model="keyword"
         :loading="loading"
-        placeholder="구매자, 참석자, 전화번호, 교회, 교단"
+        placeholder="구매자, 참석자, 전화번호, 교회, 교단, 메모"
         @submit="onSearch"
         @reset="onReset"
       >
