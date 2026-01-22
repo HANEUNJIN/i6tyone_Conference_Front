@@ -59,6 +59,7 @@ const COLUMNS3 = [
   { key: 'g2_1', label: 'G2-1', width: '3%', align: 'right' },
   { key: 'g2_2', label: 'G2-2', width: '3%', align: 'right' },
   { key: '유아_장애', label: '유아&장애', width: '3%', align: 'right' },
+  { key: 'STAFF', label: 'STAFF', width: '3%', align: 'right' },
   { key: '미지정', label: '미지정', width: '3%', align: 'right' },
 ];
 
@@ -310,6 +311,14 @@ onMounted(() => {
 
             <template #cell-유아_장애="{ item }">
               {{ formatMoney(item?.유아_장애) }}
+            </template>
+
+            <template #cell-미지정="{ item }">
+              {{ formatMoney(item?.미지정) }}
+            </template>
+
+            <template #cell-STAFF="{ item }">
+              {{ formatMoney(item?.STAFF) }}
             </template>
           </UiDataTable>
         </CCardBody>
