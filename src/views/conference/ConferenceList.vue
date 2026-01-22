@@ -433,8 +433,11 @@ onMounted(() => {
               전송
             </CButton>
           </div>
-          <div v-else class="text-info fw-bold">
+          <div v-else-if="item.createQR === 'Y'" class="text-info fw-bold">
             O
+          </div>
+          <div v-else class="text-secondary fw-bold">
+            {{ item.createQR }}
           </div>
         </template>
 
