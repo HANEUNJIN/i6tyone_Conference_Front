@@ -302,8 +302,9 @@ onMounted(() => {
 
     <CCardBody>
       <div class="mb-2">
-        1. 명단 및 결제 확인 후 <strong>[결제완료]</strong> 버튼을 클릭하세요.<br />
-        2. 처리된 내역은 <strong>[등록명단]</strong> 페이지 에서 조회할 수 있습니다.
+        <span class="fw-bold">ℹ️ 현장 등록 연동 방법 안내</span><br />
+        1. <span class="text-info text-decoration-underline">26 conf. 현장 등록(응답).xlsx</span> 파일을 기준으로 등록 명단을 확인해 주시기 바랍니다.<br />
+        2. 결제 확인 후 <strong>[결제완료]</strong> 버튼을 클릭하시면 <strong>[등록명단]</strong> 페이지에서 조회하실 수 있습니다.
       </div>
 
       <!-- 검색 -->
