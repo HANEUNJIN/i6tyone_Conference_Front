@@ -434,6 +434,9 @@ onMounted(() => {
               전송
             </CButton>
           </div>
+          <div v-else class="text-info fw-bold">
+            O
+          </div>
         </template>
 
         <!-- 가이드북 전송 -->
