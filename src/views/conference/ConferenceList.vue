@@ -39,7 +39,7 @@ const ticketOptions = ref([]);
 const days = ref(''); //신청일
 const daysOptions = ref([]);
 
-const area = ref(''); //좌석구분
+const area = ref('ALL'); //좌석구분
 const areaOptions = ref([]);
 
 const check = ref(false);
@@ -116,7 +116,7 @@ const fetchSearchOptions = async () => {
       toastApi.errorFromResult(areaRes);
     }
     const areaList = areaRes.data?.data?.list ?? [];
-    areaOptions.value = [{ key: '', value: '좌석구분' }, ...areaList];
+    areaOptions.value = [{ key: 'ALL', value: '좌석구분' }, ...areaList];
   } catch (e) {
     toastApi.errorFromException(e);
   } finally {
@@ -174,7 +174,7 @@ const fetchList = async ({ page, size, keyword }) => {
     option: ticket.value ? [ticket.value] : [],
     day: days.value ? [days.value] : [],
     keyword: keyword,
-    area: area.value ? [area.value] : [],
+    area: [area.value ?? ''],
     pageNum: page,
     pageSize: size,
   };
