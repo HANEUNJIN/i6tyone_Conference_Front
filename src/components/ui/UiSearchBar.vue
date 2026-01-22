@@ -42,7 +42,7 @@ function onReset() {
         v-model="keyword"
         :placeholder="placeholder"
         size="sm"
-        style="width: 250px"
+        style="width: 300px"
       />
       <slot name="extra-back" />
     </div>
