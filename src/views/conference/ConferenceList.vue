@@ -301,6 +301,7 @@ const onInterlock = async () => {
 
     const successCount = res.data?.data?.successCount;
     toast.success(`${successCount}건의 데이터가 연동되었습니다.`);
+    init();
   } catch (e) {
     toastApi.errorFromException(e);
   }

@@ -116,5 +116,11 @@ export const ConferenceApi = {
   getGoogleSheetInterlock() {
     const url = buildUrl(`/api/Excel/google-sheet`);
     return client.get(url);
+  },
+
+  // 현장등록 Google Sheet 연동
+  getOnsiteGoogleSheetInterlock() {
+    const url = buildUrl(`/api/Excel/onsite-google-sheet`);
+    return client.get(url);
   }
 };
