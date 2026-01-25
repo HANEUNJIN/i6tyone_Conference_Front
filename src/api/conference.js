@@ -90,8 +90,8 @@ export const ConferenceApi = {
   },
 
   // 특정 등록자 QR·SMS 발송
-  postQrCodeSmsSend(params) {
-    return client.post(`/api/Register/qrcode-single`, params);
+  postQrCodeSmsSend(uniqueIdKey) {
+    return client.post(`/api/Register/qrcode-single?uniqueIdKey=${encodeURIComponent(uniqueIdKey)}`);
   },
 
   // 이벤터스 CSV 파일 동기화

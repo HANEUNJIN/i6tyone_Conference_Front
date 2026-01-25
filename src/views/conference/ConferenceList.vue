@@ -269,12 +269,7 @@ const sendQrCode = async (row) => {
   if (!ok) return;
 
   try {
-    const params = {
-      buyer: row.buyer,
-      phone: row.phone,
-    };
-
-    const res = await ConferenceApi.postQrCodeSmsSend(params);
+    const res = await ConferenceApi.postQrCodeSmsSend(row.uniqueId);
     if (res.data?.resultCd !== '0000')
       return toast.error(res.data?.resultMsg);
 
