@@ -235,6 +235,30 @@ const goModify = (key) => {
   // });
 };
 
+const onDelete = async (item) => {
+  // const disposeCount = items.value.filter((item) => item.check).map((item) => item.uniqueId);
+  // if (disposeCount.length === 0) return;
+
+  const uniqueId = item.uniqueId;
+
+  const ok = await modal.show({
+    title: `[${item.buyer}] 정보 폐기`,
+    message: `해당 정보를 폐기하시겠습니까?\n삭제된 정보는 담당자한테 문의 바랍니다.`,
+    confirmText: '폐기',
+  });
+  if (!ok) return;
+
+  try {
+    const res = await ConferenceApi.postOnSiteDispose(uniqueId);
+    if (!res.ok) return toastApi.errorFromResult(res);
+
+    toast.success('폐기되었습니다.');
+    init();
+  } catch (e) {
+    toastApi.errorFromException(e);
+  }
+};
+
 const onPay = async (item) => {
   const uniqueId = item.uniqueId;
 

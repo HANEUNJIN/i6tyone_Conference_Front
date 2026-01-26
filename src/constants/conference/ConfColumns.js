@@ -47,7 +47,8 @@ export const CONF_ONSITE_COLUMNS = [
   { key: 'age', label: '나이', width: '3%' },
 
   { key: 'church', label: '교회', width: '10%', align: 'left' },
-  { key: 'memo', label: '메모', width: '16%', align: 'left' },
+  { key: 'memo', label: '메모', width: '13%', align: 'left' },
 
   { key: 'payYn', label: '결제완료', width: '3%' },
+  { key: 'delete', label: '폐기', width: '3%' },
 ];

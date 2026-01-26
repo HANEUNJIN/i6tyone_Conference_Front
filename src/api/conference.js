@@ -79,6 +79,11 @@ export const ConferenceApi = {
     return client.post(`/api/Register/dispose?uniqueIdKey=${encodeURIComponent(uniqueIdKey)}`);
   },
 
+  // 현장등록자 컨퍼런스 등록 폐기
+  postOnSiteDispose(uniqueIdKey) {
+    return client.post(`/api/OnSiteRegister/dispose?uniqueIdKey=${encodeURIComponent(uniqueIdKey)}`);
+  },
+
   // 현장등록자 결제완료 및 연동
   postPaymentsComplete(uniqueIdKey) {
     return client.post(`/api/OnSiteRegister/payments/complete?uniqueIdKey=${encodeURIComponent(uniqueIdKey)}`);
