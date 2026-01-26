@@ -125,12 +125,14 @@ onMounted(() => {
               <CButton color="secondary" variant="outline" size="sm" type="button" @click="onReset">
                 초기화
               </CButton>
-              <div class="d-flex align-items-center gap-2">
-                <h6 class="fw-bold mb-0 text-danger">{{ successMsg }}</h6>
-              </div>
             </template>
           </UiSearchBar>
         </CCardBody>
+        <CCardFooter>
+          <div class="d-flex justify-content-end gap-2">
+            <h6 class="fw-bold mb-0 text-danger">{{ successMsg }}</h6>
+          </div>
+        </CCardFooter>
       </CCard>
     </CCol>
   </CRow>
