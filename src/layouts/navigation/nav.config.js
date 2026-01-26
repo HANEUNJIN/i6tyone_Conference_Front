@@ -28,24 +28,24 @@ export default [
         to: '/conference/ConferenceList',
         menuKey: 'conference.conference',
       },
-      {
-        component: 'CNavItem',
-        name: '현장구매 명단',
-        to: '/conference/OnSitePurchaseList',
-        menuKey: 'conference.OnSitePurchaseList',
-      },
+      // {
+      //   component: 'CNavItem',
+      //   name: '현장구매 명단',
+      //   to: '/conference/OnSitePurchaseList',
+      //   menuKey: 'conference.OnSitePurchaseList',
+      // },
       // {
       //   component: 'CNavItem',
       //   name: '구역 우선 선택권',
       //   to: '/conference/SelectZone',
       //   menuKey: 'conference.selectZone',
       // },
-      {
-        component: 'CNavItem',
-        name: '이벤터스',
-        to: '/conference/EventUs',
-        menuKey: 'conference.eventUs',
-      },
+      // {
+      //   component: 'CNavItem',
+      //   name: '이벤터스',
+      //   to: '/conference/EventUs',
+      //   menuKey: 'conference.eventUs',
+      // },
     ],
   },
 ];
