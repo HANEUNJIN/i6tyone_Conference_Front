@@ -302,6 +302,28 @@ const onInterlock = async () => {
   }
 };
 
+const onSite = async () => {
+  const confirm = await modal.show({
+    title: '현장구매 연동.xlsx',
+    message: '데이터를 연동 하시겠습니까?',
+    confirmText: '연동',
+  });
+  if (!confirm)
+    return;
+
+  try {
+    const res = await ConferenceApi.getOnsiteGoogleSheetInterlock();
+    if (res.data?.resultCd !== '0000')
+      return toast.error(res.data?.resultMsg);
+
+    const successCount = res.data?.data?.successCount;
+    toast.success(`${successCount}건의 데이터가 연동되었습니다.`);
+    init();
+  } catch (e) {
+    toastApi.errorFromException(e);
+  }
+};
+
 onMounted(() => {
   fetchSearchOptions();
   fetchStatistics();
@@ -362,6 +384,7 @@ onMounted(() => {
           <!--          <CButton color="warning" size="sm" type="button" @click="onSms">SMS 전송</CButton>-->
           <CButton color="success" size="sm" type="button" @click="excelDownload">엑셀</CButton>
           <CButton color="primary" size="sm" @click="onInterlock">이벤터스 연동</CButton>
+          <CButton color="info" size="sm" @click="onSite">현장구매 연동</CButton>
 
           <!--          <CFormCheck-->
           <!--            class="checkbox"-->
