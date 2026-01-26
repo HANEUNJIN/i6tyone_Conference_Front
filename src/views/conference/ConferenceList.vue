@@ -395,6 +395,11 @@ onMounted(() => {
           <span v-else-if="item.attend === 'Y'" class="text-info fw-bold"> O </span>
         </template>
 
+        <template #cell-newBelieverYn="{ item }">
+          <span v-if="item.newBelieverYn === 'N'" class="text-danger fw-bold"> X </span>
+          <span v-else-if="item.newBelieverYn === 'Y'" class="text-info fw-bold"> O </span>
+        </template>
+
         <template #cell-option="{ item }">
           <span v-if="item.option === 1">슈퍼얼리</span>
           <span v-if="item.option === 2">얼리 1차</span>
