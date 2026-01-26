@@ -3,7 +3,6 @@ import UiSearchBar from '@/components/ui/UiSearchBar.vue';
 import UiGridTable from '@/components/ui/UiGridTable.vue';
 import UiLoading from '@/components/ui/UiLoading.vue';
 import { computed, onMounted, ref } from 'vue';
-import { usePaginatedQueryList } from '@/composables/usePaginatedQueryList';
 import { ConferenceApi } from '@/api/conference';
 import { useRoute, useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
@@ -43,8 +42,8 @@ const userInfoFields = computed(() => [
   {
     label1: '구매자',
     value1: detailInfo.value.buyer || '',
-    label2: '출석여부',
-    value2: detailInfo.value.attend || '',
+    label2: '참석자',
+    value2: detailInfo.value.attender || '',
   },
   {
     label1: '티켓구분',
@@ -61,7 +60,8 @@ const userInfoFields = computed(() => [
   {
     label1: '좌석구역',
     value1: detailInfo.value.area || '',
-    colspan: true,
+    label2: '출석여부',
+    value2: detailInfo.value.attend || '',
   },
 ]);
 
