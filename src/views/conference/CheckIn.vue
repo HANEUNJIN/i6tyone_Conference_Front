@@ -10,6 +10,8 @@ import { useBaseStore } from '@/stores/base';
 import { useToast } from '@/composables/useToast';
 import { useApiToast } from '@/composables/useApiToast';
 import { isValidateEmpty } from '@/utils/common';
+import UiDataTable from '@/components/ui/UiDataTable.vue';
+import { CONF_LOG_COLUMNS } from '@/constants/conference/ConfColumns';
 
 const route = useRoute();
 const router = useRouter();
@@ -22,6 +24,7 @@ const isLoading = ref(false);
 const detailInfo = ref({});
 const successMsg = ref('');
 const keyword = ref('');
+const logItems = ref([]);
 
 const optionMap = {
   1: '슈퍼얼리',
@@ -78,6 +81,13 @@ const fetchList = async () => {
     }
     detailInfo.value = res.data?.data ?? [];
     successMsg.value = res.data?.resultCd === '0000' ? '성공' : res.data?.resultMsg;
+
+    const newItem = detailInfo.value;
+    const lastItem = logItems?.value[0]; // 가장 최근 로그
+
+    if (!lastItem || lastItem.attender !== newItem.attender) {
+      logItems.value.unshift(newItem);
+    }
   } catch (e) {
     toastApi.errorFromException(e);
   } finally {
@@ -134,10 +144,7 @@ onMounted(() => {
           </div>
         </CCardFooter>
       </CCard>
-    </CCol>
-  </CRow>
-  <CRow>
-    <CCol sm="5">
+
       <CCard class="mb-3">
         <CCardHeader><h6 class="mb-0 fw-bold">회원정보</h6></CCardHeader>
         <CCardBody>
@@ -145,6 +152,43 @@ onMounted(() => {
             <UiLoading />
           </div>
           <UiGridTable :fields="userInfoFields" />
+        </CCardBody>
+      </CCard>
+    </CCol>
+    <CCol sm="7">
+      <CCard class="flex-grow-1">
+        <CCardHeader>
+          <h6 class="mb-0 fw-bold">등록 기록</h6>
+        </CCardHeader>
+
+        <CCardBody>
+          <UiDataTable
+            :columns="CONF_LOG_COLUMNS"
+            :items="logItems"
+            :loading="isLoading"
+            :row-clickable="true"
+          >
+            <template #cell-option="{ item }">
+              <span v-if="item.option === 1">슈퍼얼리</span>
+              <span v-if="item.option === 2">얼리 1차</span>
+              <span v-if="item.option === 3">얼리 2차</span>
+              <span v-if="item.option === 4">공식</span>
+              <span v-if="item.option === 5">이벤트</span>
+              <span v-if="item.option === 6">현장구매</span>
+              <span v-if="item.option === 7">VIP</span>
+              <span v-else></span>
+            </template>
+
+            <template #cell-day="{ item }">
+              <div class="fw-bold">
+                <span v-if="item.day === 1">화</span>
+                <span v-if="item.day === 2">수</span>
+                <span v-if="item.day === 3">목</span>
+                <span v-if="item.day === 4">3-day</span>
+                <span v-else></span>
+              </div>
+            </template>
+          </UiDataTable>
         </CCardBody>
       </CCard>
     </CCol>

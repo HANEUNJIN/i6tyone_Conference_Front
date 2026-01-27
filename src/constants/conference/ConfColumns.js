@@ -52,3 +52,14 @@ export const CONF_ONSITE_COLUMNS = [
   { key: 'payYn', label: '결제완료', width: '3%' },
   { key: 'delete', label: '폐기', width: '3%' },
 ];
+
+export const CONF_LOG_COLUMNS = [
+  { key: 'option', label: '티켓구분', width: '5%' },
+  { key: 'day', label: '신청일', width: '5%' },
+  { key: 'area', label: '구역', width: '4%' },
+  { key: 'count', label: '수량', width: '3%' },
+  { key: 'buyer', label: '구매자', width: '7%' },
+  { key: 'attender', label: '참석자', width: '7%' },
+  { key: 'church', label: '교회', width: '10%', align: 'left' },
+  { key: 'attend', label: '출석', width: '3%' },
+];
