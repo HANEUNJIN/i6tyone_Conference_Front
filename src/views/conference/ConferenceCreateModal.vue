@@ -152,13 +152,7 @@ const userInfoFields = computed(() => [
   {
     cols: [
       { label: '출석여부', key: 'attend' },
-      { label: '새신자여부', key: 'newBelieverYn' },
-    ],
-  },
-  {
-    cols: [
       { label: '가이드북 발송여부', key: 'notionSmsYn' },
-      { label: '', key: '' },
     ],
   },
   {
@@ -202,16 +196,14 @@ const fetchSearchOptions = async () => {
 };
 
 const handleSubmit = async () => {
-  if (isSubmitting.value)
-    return;
+  if (isSubmitting.value) return;
 
   const confirm = await modal.show({
     title: '등록',
     message: '등록하시겠습니까?',
     confirmText: '등록',
   });
-  if (!confirm)
-    return;
+  if (!confirm) return;
 
   try {
     isSubmitting.value = true;
@@ -236,12 +228,10 @@ const handleSubmit = async () => {
     };
 
     const msg = validateForm(params);
-    if (msg)
-      return toast.error(msg);
+    if (msg) return toast.error(msg);
 
     const res = await ConferenceApi.postCreate(params);
-    if (!res.ok)
-      return toastApi.errorFromResult(res);
+    if (!res.ok) return toastApi.errorFromResult(res);
 
     toast.success('등록되었습니다.');
     emit('confirm');
@@ -253,23 +243,18 @@ const handleSubmit = async () => {
 };
 
 const validateForm = (f) => {
-  if (!f.option?.trim())
-    return '티켓구분을 선택하세요.';
+  if (!f.option?.trim()) return '티켓구분을 선택하세요.';
 
-  if (!f.day?.trim())
-    return '신청일을 선택하세요.';
+  if (!f.day?.trim()) return '신청일을 선택하세요.';
 
-  if (!f.day?.trim())
-    return '구매자를 입력하세요.';
+  if (!f.day?.trim()) return '구매자를 입력하세요.';
 
-  if (!f.phone?.trim())
-    return '전화번호를 입력하세요.';
+  if (!f.phone?.trim()) return '전화번호를 입력하세요.';
 
-  if (!f.count?.trim())
-    return '구매수량을 입력하세요.';
+  if (!f.count?.trim()) return '구매수량을 입력하세요.';
 
   return '';
-}
+};
 
 const handleCancel = () => {
   modalVisible.value = false;

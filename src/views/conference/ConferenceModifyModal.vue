@@ -140,13 +140,7 @@ const userInfoFields = computed(() => [
   {
     cols: [
       { label: '출석여부', key: 'attend' },
-      { label: '새신자여부', key: 'newBelieverYn' },
-    ],
-  },
-  {
-    cols: [
       { label: '가이드북 발송여부', key: 'notionSmsYn' },
-      { label: '', key: '' },
     ],
   },
   {
@@ -211,16 +205,14 @@ const handleCancel = () => {
 };
 
 const handleSubmit = async () => {
-  if (isSubmitting.value)
-    return;
+  if (isSubmitting.value) return;
 
   const confirm = await modal.show({
     title: '저장',
     message: '수정 내용을 저장하시겠습니까?',
     confirmText: '저장',
   });
-  if (!confirm)
-    return;
+  if (!confirm) return;
 
   try {
     isSubmitting.value = true;
@@ -249,8 +241,7 @@ const handleSubmit = async () => {
 
     const res = await ConferenceApi.postModify(params);
     console.log(res);
-    if (!res.ok)
-      return toastApi.errorFromResult(res);
+    if (!res.ok) return toastApi.errorFromResult(res);
 
     toast.success('저장되었습니다.');
     emit('confirm');
