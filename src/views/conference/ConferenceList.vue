@@ -44,6 +44,7 @@ const areaOptions = ref([]);
 
 const check = ref(false);
 const allCheck = ref(false);
+const attend = ref(false);
 
 //통계
 const totalUsers = ref(0);
@@ -175,6 +176,7 @@ const fetchList = async ({ page, size, keyword }) => {
     day: days.value ? [days.value] : [],
     keyword: keyword,
     area: [area.value ?? ''],
+    attend: String(attend.value) === 'true' ? 'Y' : 'N',
     pageNum: page,
     pageSize: size,
   };
@@ -203,7 +205,7 @@ const { loading, items, total, page, size, keyword, init, onReset, onSearch, onP
     defaultKeyword: '',
     searchPushHistory: true,
     queryKeys: { page: 'page', size: 'size', keyword: 'keyword' },
-    extra: { ticket, days, area },
+    extra: { ticket, days, area, attend },
     autoSearchOnExtraChange: true,
   });
 
@@ -377,6 +379,10 @@ onMounted(() => {
               {{ opt.value }}
             </option>
           </CFormSelect>
+
+          <div class="d-flex align-items-center">
+            <CFormCheck class="checkbox" id="attend" label="출석여부" v-model="attend" />
+          </div>
         </template>
 
         <template #extra-btn>
