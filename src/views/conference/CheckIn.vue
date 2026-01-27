@@ -85,9 +85,10 @@ const fetchList = async () => {
     const newItem = detailInfo.value;
     const lastItem = logItems?.value[0]; // 가장 최근 로그
 
-    if (!lastItem || lastItem.attender !== newItem.attender) {
+    const isDuplicate = lastItem && lastItem.attender === newItem.attender && lastItem.day === newItem.day;
+
+    if (!isDuplicate)
       logItems.value.unshift(newItem);
-    }
   } catch (e) {
     toastApi.errorFromException(e);
   } finally {
