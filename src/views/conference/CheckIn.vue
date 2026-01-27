@@ -2,7 +2,7 @@
 import UiSearchBar from '@/components/ui/UiSearchBar.vue';
 import UiGridTable from '@/components/ui/UiGridTable.vue';
 import UiLoading from '@/components/ui/UiLoading.vue';
-import { computed, onMounted, ref } from 'vue';
+import { computed, nextTick, onMounted, ref } from 'vue';
 import { ConferenceApi } from '@/api/conference';
 import { useRoute, useRouter } from 'vue-router';
 import { useAuthStore } from '@/stores/auth';
@@ -25,6 +25,7 @@ const detailInfo = ref({});
 const successMsg = ref('');
 const keyword = ref('');
 const logItems = ref([]);
+const inputFocus = ref(null);
 
 const optionMap = {
   1: '슈퍼얼리',
@@ -85,10 +86,14 @@ const fetchList = async () => {
     const newItem = detailInfo.value;
     const lastItem = logItems?.value[0]; // 가장 최근 로그
 
-    const isDuplicate = lastItem && lastItem.attender === newItem.attender && lastItem.day === newItem.day;
-
-    if (!isDuplicate)
+    if (!lastItem || lastItem.uniqueId !== newItem.uniqueId)
       logItems.value.unshift(newItem);
+
+    //focus 처리
+    await nextTick(); // DOM 업데이트 대기
+    inputFocus.value.querySelector('input')?.focus();
+
+    keyword.value = '';
   } catch (e) {
     toastApi.errorFromException(e);
   } finally {
@@ -125,19 +130,27 @@ onMounted(() => {
         </CCardHeader>
 
         <CCardBody>
-          <UiSearchBar
-            v-model="keyword"
-            :loading="isLoading"
-            :show-reset="false"
-            placeholder="QR코드를 스캔하세요."
-            @submit="fetchList"
-          >
-            <template #extra-btn>
-              <CButton color="secondary" variant="outline" size="sm" type="button" @click="onReset">
-                초기화
-              </CButton>
-            </template>
-          </UiSearchBar>
+          <div ref="inputFocus">
+            <UiSearchBar
+              v-model="keyword"
+              :loading="isLoading"
+              :show-reset="false"
+              placeholder="QR코드를 스캔하세요."
+              @submit="fetchList"
+            >
+              <template #extra-btn>
+                <CButton
+                  color="secondary"
+                  variant="outline"
+                  size="sm"
+                  type="button"
+                  @click="onReset"
+                >
+                  초기화
+                </CButton>
+              </template>
+            </UiSearchBar>
+          </div>
         </CCardBody>
         <CCardFooter>
           <div class="d-flex justify-content-end gap-2">
