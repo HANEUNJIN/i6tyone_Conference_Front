@@ -107,7 +107,7 @@ onMounted(() => {
 
 <template>
   <CRow>
-    <CCol sm="4">
+    <CCol sm="5">
       <CCard class="mb-3">
         <CCardHeader>
           <h6 class="d-flex align-content-center gap-1 mb-0 fw-bold">현장 입장 등록</h6>
@@ -137,7 +137,7 @@ onMounted(() => {
     </CCol>
   </CRow>
   <CRow>
-    <CCol sm="4">
+    <CCol sm="5">
       <CCard class="mb-3">
         <CCardHeader><h6 class="mb-0 fw-bold">회원정보</h6></CCardHeader>
         <CCardBody>
