@@ -18,10 +18,9 @@ export const CONF_COLUMNS = [
   { key: 'newBelieverYn', label: '새신자', width: '3%' },
   { key: 'memo', label: '메모', width: '17%', align: 'left' },
 
-
+  { key: 'attend', label: '출석', width: '3%' },
   { key: 'notionSmsYn', label: '노션 전송', width: '4%' },
 
-  { key: 'attend', label: '출석', width: '3%' },
   { key: 'createQR', label: 'QR 전송', width: '4%' },
 
   // { key: 'sms01', label: '구역 1차', width: '4%' },

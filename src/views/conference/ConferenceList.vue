@@ -326,6 +326,28 @@ const onSite = async () => {
   }
 };
 
+const onAttend = async (item) => {
+  const uniqueId = item.uniqueId;
+
+  const ok = await modal.show({
+    title: `[${item.buyer}] 출석 처리`,
+    message: '출석 처리하시겠습니까?',
+    confirmText: '출석',
+  });
+  if (!ok) return;
+
+  try {
+    const res = await ConferenceApi.postCheckIn(uniqueId);
+    if (!res.ok)
+      return toastApi.errorFromResult(res);
+
+    toast.success('출석 처리되었습니다.');
+    init();
+  } catch (e) {
+    toastApi.errorFromException(e);
+  }
+};
+
 onMounted(() => {
   fetchSearchOptions();
   fetchStatistics();
@@ -420,8 +442,21 @@ onMounted(() => {
         </template>
 
         <template #cell-attend="{ item }">
-          <span v-if="item.attend === 'N'" class="text-danger fw-bold"> X </span>
-          <span v-else-if="item.attend === 'Y'" class="text-info fw-bold"> O </span>
+          <div v-if="item.attend === 'N'">
+            <CButton
+              color="warning"
+              variant="outline"
+              size="sm"
+              type="button"
+              @click="onAttend(item)"
+            >
+              출석
+            </CButton>
+          </div>
+          <div v-else-if="item.attend === 'Y'" class="text-warning fw-bold">O</div>
+          <div v-else class="text-secondary fw-bold">
+            {{ item.attend }}
+          </div>
         </template>
 
         <template #cell-newBelieverYn="{ item }">
@@ -463,9 +498,7 @@ onMounted(() => {
               전송
             </CButton>
           </div>
-          <div v-else-if="item.createQR === 'Y'" class="text-info fw-bold">
-            O
-          </div>
+          <div v-else-if="item.createQR === 'Y'" class="text-success fw-bold">O</div>
           <div v-else class="text-secondary fw-bold">
             {{ item.createQR }}
           </div>
