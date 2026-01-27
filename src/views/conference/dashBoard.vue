@@ -36,6 +36,7 @@ const COLUMNS2 = [
   { key: 'event', label: '이벤트', width: '3%', align: 'right' },
   { key: 'site', label: '현장구매', width: '3%', align: 'right' },
   { key: 'vip', label: 'VIP', width: '3%', align: 'right' },
+  { key: 'newBeliever', label: '새신자', width: '3%', align: 'right' },
   { key: 'total', label: '합계', width: '3%', align: 'right' },
 ];
 
@@ -156,8 +157,6 @@ onMounted(() => {
 <template>
   <CRow class="g-3">
     <CCol sm="4">
-
-
       <CCard class="mb-3">
         <CCardHeader>
           <p class="fw-bold mb-0">좌석 배치도</p>
@@ -327,8 +326,7 @@ onMounted(() => {
   </CRow>
 
   <CRow class="g-3">
-    <CCol sm="4">
-    </CCol>
+    <CCol sm="4"> </CCol>
 
     <CCol sm="4">
       <CCard class="mb-3">
