@@ -89,6 +89,13 @@ const COLUMNS6 = [
   { key: 'totalCount', label: '총 등록자 수', width: '5%', align: 'right' },
 ];
 
+const COLUMNS7 = [
+  { key: 'day', label: '신청일', width: '5%' },
+  { key: 'option', label: '티켓구분', width: '5%' },
+  { key: 'totalCount', label: '총 등록자 수', width: '5%', align: 'right' },
+  { key: 'dayTotalCount', label: '총 등록자 수', width: '5%', align: 'right' },
+];
+
 //통계
 const summary = ref([]);
 const totalAreaList = computed(() => [totalArea.value]);
@@ -103,6 +110,7 @@ const totalAttend = ref({
 });
 const areaRemaining = ref([]);
 const totalDay = ref([]);
+const dayAttendance = ref([]);
 
 const fetchStatistics = async () => {
   optionsLoading.value = true;
@@ -142,6 +150,12 @@ const fetchStatistics = async () => {
       toastApi.errorFromResult(dayRes);
     }
     totalDay.value = dayRes.data?.data?.list;
+
+    const dayAttendanceRes = await ConferenceApi.GetDayAttendanceSummaryAsync();
+    if (!dayAttendanceRes.ok) {
+      toastApi.errorFromResult(dayAttendanceRes);
+    }
+    dayAttendance.value = dayAttendanceRes.data?.data?.list;
   } catch (e) {
     toastApi.errorFromException(e);
   } finally {
@@ -397,6 +411,22 @@ onMounted(() => {
               </div>
             </template>
           </UiDataTable>
+        </CCardBody>
+      </CCard>
+
+      <CCard class="mb-3">
+        <CCardHeader>
+          <p class="fw-bold mb-0">일자별 참석 유형별 집계 현황</p>
+        </CCardHeader>
+
+        <CCardBody>
+          <UiDataTable
+            :columns="COLUMNS7"
+            :items="dayAttendance"
+            :loading="optionsLoading"
+            :row-clickable="true"
+            :row-span-columns="['day', 'dayTotalCount']"
+          />
         </CCardBody>
       </CCard>
     </CCol>

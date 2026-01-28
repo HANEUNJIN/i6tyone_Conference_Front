@@ -117,6 +117,12 @@ export const ConferenceApi = {
     return client.get(url);
   },
 
+  //일자별 참석 유형별 집계 현황
+  GetDayAttendanceSummaryAsync() {
+    const url = buildUrl(`/api/Statistics/day-attendance-summary`);
+    return client.get(url);
+  },
+
   // 이벤터스 Google Sheet 연동
   getGoogleSheetInterlock() {
     const url = buildUrl(`/api/Excel/google-sheet`);
