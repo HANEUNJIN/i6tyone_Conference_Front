@@ -8,20 +8,20 @@ export const CONF_COLUMNS = [
 
   { key: 'buyer', label: '구매자', width: '7%' },
   { key: 'attender', label: '참석자', width: '7%' },
-  { key: 'phone', label: '전화번호', width: '7%' },
+  { key: 'phone', label: '전화번호', width: '10%' },
   { key: 'gender', label: '성별', width: '3%' },
   { key: 'age', label: '나이', width: '3%' },
 
   { key: 'church', label: '교회', width: '10%', align: 'left' },
-  { key: 'local', label: '거주지역', width: '6%' },
+  // { key: 'local', label: '거주지역', width: '6%' },
   // { key: 'denom', label: '교단', width: '6%' },
-  { key: 'newBelieverYn', label: '새신자', width: '3%' },
+  { key: 'newBelieverYn', label: '새신자', width: '4%' },
   { key: 'memo', label: '메모', width: '17%', align: 'left' },
 
   { key: 'attend', label: '출석', width: '3%' },
-  { key: 'notionSmsYn', label: '노션 전송', width: '4%' },
+  // { key: 'notionSmsYn', label: '노션 전송', width: '4%' },
 
-  { key: 'createQR', label: 'QR 전송', width: '4%' },
+  { key: 'createQR', label: 'QR', width: '3%' },
 
   // { key: 'sms01', label: '구역 1차', width: '4%' },
   // { key: 'sms02', label: '구역 2차', width: '4%' },
