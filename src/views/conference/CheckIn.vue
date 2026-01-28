@@ -126,10 +126,16 @@ onMounted(() => {
     <CCol sm="5">
       <CCard class="mb-3">
         <CCardHeader>
-          <h6 class="d-flex align-content-center gap-1 mb-0 fw-bold">현장 입장 등록</h6>
+          <h6 class="d-flex align-content-center gap-1 mb-0 fw-bold">현장 입장 등록</ h6>
         </CCardHeader>
 
         <CCardBody>
+          <div class="mb-2">
+            <span class="fw-bold">️ℹ️ QR코드 인식 안내</span><br />
+            * 이벤터스 QR코드가 아닌, <span class="text-danger">문자메시지로 발송된 QR코드</span>를 스캔해 주세요.<br />
+            * 이벤터스 QR코드를 스캔할 경우 '복호화 오류' 로<span class="text-danger">입장이 제한</span>될 수 있습니다.
+          </div>
+
           <div ref="inputFocus">
             <UiSearchBar
               v-model="keyword"
