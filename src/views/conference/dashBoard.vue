@@ -59,9 +59,9 @@ const COLUMNS3 = [
   { key: 'f2_2', label: 'F2-2', width: '3%', align: 'right' },
   { key: 'g2_1', label: 'G2-1', width: '3%', align: 'right' },
   { key: 'g2_2', label: 'G2-2', width: '3%', align: 'right' },
-  { key: '유아_장애', label: '유아&장애', width: '3%', align: 'right' },
-  { key: 'STAFF', label: 'STAFF', width: '3%', align: 'right' },
-  { key: '미지정', label: '미지정', width: '3%', align: 'right' },
+  { key: '유아_장애', label: '유아&장애', width: '4%', align: 'right' },
+  { key: 'STAFF', label: 'STAFF', width: '4%', align: 'right' },
+  { key: '미지정', label: '미지정', width: '4%', align: 'right' },
 ];
 
 const COLUMNS4 = [
@@ -91,7 +91,7 @@ const COLUMNS6 = [
 
 const COLUMNS7 = [
   { key: 'day', label: '신청일', width: '5%' },
-  { key: 'option', label: '티켓구분', width: '5%' },
+  { key: 'option', label: '티켓구분', width: '5%', align: 'left' },
   { key: 'totalCount', label: '총 등록자 수', width: '5%', align: 'right' },
   { key: 'dayTotalCount', label: '총 등록자 수', width: '5%', align: 'right' },
 ];
@@ -237,111 +237,111 @@ onMounted(() => {
           </UiDataTable>
         </CCardBody>
       </CCard>
-
-      <CCard class="mb-3">
-        <CCardHeader>
-          <p class="fw-bold mb-0">좌석별 통계</p>
-        </CCardHeader>
-
-        <CCardBody>
-          <UiDataTable
-            :columns="COLUMNS3"
-            :items="totalAreaList"
-            :loading="optionsLoading"
-            :row-clickable="true"
-          >
-            <template #cell-a1="{ item }">
-              {{ formatMoney(item?.a1) }}
-            </template>
-
-            <template #cell-b1="{ item }">
-              {{ formatMoney(item?.b1) }}
-            </template>
-
-            <template #cell-c1="{ item }">
-              {{ formatMoney(item?.c1) }}
-            </template>
-
-            <template #cell-d1="{ item }">
-              {{ formatMoney(item?.d1) }}
-            </template>
-
-            <template #cell-a2_1="{ item }">
-              {{ formatMoney(item?.a2_1) }}
-            </template>
-
-            <template #cell-a2_2="{ item }">
-              {{ formatMoney(item?.a2_2) }}
-            </template>
-
-            <template #cell-b2_1="{ item }">
-              {{ formatMoney(item?.b2_1) }}
-            </template>
-
-            <template #cell-b2_2="{ item }">
-              {{ formatMoney(item?.b2_2) }}
-            </template>
-
-            <template #cell-c2_1="{ item }">
-              {{ formatMoney(item?.c2_1) }}
-            </template>
-
-            <template #cell-c2_2="{ item }">
-              {{ formatMoney(item?.c2_2) }}
-            </template>
-
-            <template #cell-d2_1="{ item }">
-              {{ formatMoney(item?.d2_1) }}
-            </template>
-
-            <template #cell-d2_2="{ item }">
-              {{ formatMoney(item?.d2_2) }}
-            </template>
-
-            <template #cell-e2_1="{ item }">
-              {{ formatMoney(item?.e2_1) }}
-            </template>
-
-            <template #cell-e2_2="{ item }">
-              {{ formatMoney(item?.e2_2) }}
-            </template>
-
-            <template #cell-f2_1="{ item }">
-              {{ formatMoney(item?.f2_1) }}
-            </template>
-
-            <template #cell-f2_2="{ item }">
-              {{ formatMoney(item?.f2_2) }}
-            </template>
-
-            <template #cell-g2_1="{ item }">
-              {{ formatMoney(item?.g2_1) }}
-            </template>
-
-            <template #cell-g2_2="{ item }">
-              {{ formatMoney(item?.g2_2) }}
-            </template>
-
-            <template #cell-유아_장애="{ item }">
-              {{ formatMoney(item?.유아_장애) }}
-            </template>
-
-            <template #cell-미지정="{ item }">
-              {{ formatMoney(item?.미지정) }}
-            </template>
-
-            <template #cell-STAFF="{ item }">
-              {{ formatMoney(item?.STAFF) }}
-            </template>
-          </UiDataTable>
-        </CCardBody>
-      </CCard>
     </CCol>
   </CRow>
 
   <CRow class="g-3">
-    <CCol sm="4"> </CCol>
+    <CCard class="mb-3">
+      <CCardHeader>
+        <p class="fw-bold mb-0">좌석별 통계</p>
+      </CCardHeader>
 
+      <CCardBody>
+        <UiDataTable
+          :columns="COLUMNS3"
+          :items="totalAreaList"
+          :loading="optionsLoading"
+          :row-clickable="true"
+        >
+          <template #cell-a1="{ item }">
+            {{ formatMoney(item?.a1) }}
+          </template>
+
+          <template #cell-b1="{ item }">
+            {{ formatMoney(item?.b1) }}
+          </template>
+
+          <template #cell-c1="{ item }">
+            {{ formatMoney(item?.c1) }}
+          </template>
+
+          <template #cell-d1="{ item }">
+            {{ formatMoney(item?.d1) }}
+          </template>
+
+          <template #cell-a2_1="{ item }">
+            {{ formatMoney(item?.a2_1) }}
+          </template>
+
+          <template #cell-a2_2="{ item }">
+            {{ formatMoney(item?.a2_2) }}
+          </template>
+
+          <template #cell-b2_1="{ item }">
+            {{ formatMoney(item?.b2_1) }}
+          </template>
+
+          <template #cell-b2_2="{ item }">
+            {{ formatMoney(item?.b2_2) }}
+          </template>
+
+          <template #cell-c2_1="{ item }">
+            {{ formatMoney(item?.c2_1) }}
+          </template>
+
+          <template #cell-c2_2="{ item }">
+            {{ formatMoney(item?.c2_2) }}
+          </template>
+
+          <template #cell-d2_1="{ item }">
+            {{ formatMoney(item?.d2_1) }}
+          </template>
+
+          <template #cell-d2_2="{ item }">
+            {{ formatMoney(item?.d2_2) }}
+          </template>
+
+          <template #cell-e2_1="{ item }">
+            {{ formatMoney(item?.e2_1) }}
+          </template>
+
+          <template #cell-e2_2="{ item }">
+            {{ formatMoney(item?.e2_2) }}
+          </template>
+
+          <template #cell-f2_1="{ item }">
+            {{ formatMoney(item?.f2_1) }}
+          </template>
+
+          <template #cell-f2_2="{ item }">
+            {{ formatMoney(item?.f2_2) }}
+          </template>
+
+          <template #cell-g2_1="{ item }">
+            {{ formatMoney(item?.g2_1) }}
+          </template>
+
+          <template #cell-g2_2="{ item }">
+            {{ formatMoney(item?.g2_2) }}
+          </template>
+
+          <template #cell-유아_장애="{ item }">
+            {{ formatMoney(item?.유아_장애) }}
+          </template>
+
+          <template #cell-미지정="{ item }">
+            {{ formatMoney(item?.미지정) }}
+          </template>
+
+          <template #cell-STAFF="{ item }">
+            {{ formatMoney(item?.STAFF) }}
+          </template>
+        </UiDataTable>
+      </CCardBody>
+    </CCard>
+  </CRow>
+
+  <CRow class="g-3">
     <CCol sm="4">
       <CCard class="mb-3">
         <CCardHeader>
@@ -374,7 +374,23 @@ onMounted(() => {
       </CCard>
     </CCol>
 
-    <CCol sm="4">
+    <CCol sm="5">
+      <CCard class="mb-3">
+        <CCardHeader>
+          <p class="fw-bold mb-0">일자별 참석 유형별 집계 현황</p>
+        </CCardHeader>
+
+        <CCardBody>
+          <UiDataTable
+            :columns="COLUMNS7"
+            :items="dayAttendance"
+            :loading="optionsLoading"
+            :row-clickable="true"
+            :row-span-columns="['day', 'dayTotalCount']"
+          />
+        </CCardBody>
+      </CCard>
+
       <CCard class="mb-3">
         <CCardHeader>
           <p class="fw-bold mb-0">출석·전송별 통계</p>
@@ -411,22 +427,6 @@ onMounted(() => {
               </div>
             </template>
           </UiDataTable>
-        </CCardBody>
-      </CCard>
-
-      <CCard class="mb-3">
-        <CCardHeader>
-          <p class="fw-bold mb-0">일자별 참석 유형별 집계 현황</p>
-        </CCardHeader>
-
-        <CCardBody>
-          <UiDataTable
-            :columns="COLUMNS7"
-            :items="dayAttendance"
-            :loading="optionsLoading"
-            :row-clickable="true"
-            :row-span-columns="['day', 'dayTotalCount']"
-          />
         </CCardBody>
       </CCard>
     </CCol>
