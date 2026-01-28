@@ -364,9 +364,12 @@ onMounted(() => {
 
     <CCardBody>
       <div class="mb-2">
-        <span class="fw-bold">ℹ️ 이벤터스 연동 방법 안내</span><br />
-        1. <span class="text-info text-decoration-underline">이벤터스 연동.xlsx</span> 파일을 기준으로 등록 명단을 연동해 주시기 바랍니다.<br />
-        2. 연동 완료 및 데이터 확인 후, 해당 파일은 <span class="text-danger">초기화</span>해 주시기 바랍니다.
+        <span class="fw-bold">ℹ️ 이벤터스/현장 등록 연동 방법 안내</span><br />
+        1. <span class="text-info text-decoration-underline">이벤터스 연동.xlsx</span> /
+        <span class="text-info text-decoration-underline">26 conf. 현장 등록(응답).xlsx</span>
+        파일을 기준으로 등록 명단을 연동해 주시기 바랍니다.<br />
+        2. 연동 완료 및 데이터 확인 후, 해당 파일은 <span class="text-danger">초기화</span>해 주시기
+        바랍니다.
       </div>
 
       <UiSearchBar
