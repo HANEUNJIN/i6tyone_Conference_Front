@@ -315,8 +315,3 @@ export async function fetchSomething(page, size, keyword) {
 - **@vuepic/vue-datepicker** — https://vue-datepicker.com/
 - **ESLint / Prettier** — https://eslint.org/ · https://prettier.io/
 
----
-
-## 문의
-이지스헬스케어 - 전략개발실 - B2B
-
