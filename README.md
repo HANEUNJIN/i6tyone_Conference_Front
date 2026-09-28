@@ -1,6 +1,7 @@
-# biz_front
+# i6tyone_front
 
-비즈니스 웹 프런트엔드 애플리케이션. Vue 3 + Vite 기반의 SPA로, 모듈화된 라우팅, 상태관리(Pinia), 표준화된 API 클라이언트, 일관된 코드 스타일(ESLint + Prettier)을 채택합니다.
+2026 아이자야씩스티원 컨퍼런스 등록 UI/UX 개발.
+Vue 3 + Vite 기반의 SPA로, 모듈화된 라우팅, 상태관리(Pinia), 표준화된 API 클라이언트, 일관된 코드 스타일(ESLint + Prettier)을 채택합니다.
 
 <p align="left">
   <img alt="Vue 3" src="https://img.shields.io/badge/Vue-3.x-42b883?logo=vue.js&logoColor=white">
@@ -65,7 +66,7 @@ npm run preview
 
 ```dotenv
 VITE_API_BASE_URL=/api
-VITE_APP_NAME=biz_front
+VITE_APP_NAME=i6tyone_front
 VITE_ENABLE_LOG=true
 ```
 
@@ -118,7 +119,7 @@ flowchart LR
 ## 🗂 프로젝트 구조
 
 ```text
-BIZ_FRONT/
+i6tyone_FRONT/
 ├─ public/              → 정적 자원 루트(파비콘, 고정 HTML/이미지). Vite가 그대로 복사
 │
 ├─ src/                 → 애플리케이션 소스 최상위
